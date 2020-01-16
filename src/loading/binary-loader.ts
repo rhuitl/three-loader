@@ -190,19 +190,19 @@ export class BinaryLoader {
       const buffer = buffers[property].buffer;
 
       if (this.isAttribute(property, PointAttributeName.POSITION_CARTESIAN)) {
-        geometry.setAttribute('position', new BufferAttribute(new Float32Array(buffer), 3));
+        geometry.addAttribute('position', new BufferAttribute(new Float32Array(buffer), 3));
       } else if (this.isAttribute(property, PointAttributeName.COLOR_PACKED)) {
-        geometry.setAttribute('color', new BufferAttribute(new Uint8Array(buffer), 3, true));
+        geometry.addAttribute('color', new BufferAttribute(new Uint8Array(buffer), 3, true));
       } else if (this.isAttribute(property, PointAttributeName.INTENSITY)) {
-        geometry.setAttribute('intensity', new BufferAttribute(new Float32Array(buffer), 1));
+        geometry.addAttribute('intensity', new BufferAttribute(new Float32Array(buffer), 1));
       } else if (this.isAttribute(property, PointAttributeName.CLASSIFICATION)) {
-        geometry.setAttribute('classification', new BufferAttribute(new Uint8Array(buffer), 1));
+        geometry.addAttribute('classification', new BufferAttribute(new Uint8Array(buffer), 1));
       } else if (this.isAttribute(property, PointAttributeName.NORMAL_SPHEREMAPPED)) {
-        geometry.setAttribute('normal', new BufferAttribute(new Float32Array(buffer), 3));
+        geometry.addAttribute('normal', new BufferAttribute(new Float32Array(buffer), 3));
       } else if (this.isAttribute(property, PointAttributeName.NORMAL_OCT16)) {
-        geometry.setAttribute('normal', new BufferAttribute(new Float32Array(buffer), 3));
+        geometry.addAttribute('normal', new BufferAttribute(new Float32Array(buffer), 3));
       } else if (this.isAttribute(property, PointAttributeName.NORMAL)) {
-        geometry.setAttribute('normal', new BufferAttribute(new Float32Array(buffer), 3));
+        geometry.addAttribute('normal', new BufferAttribute(new Float32Array(buffer), 3));
       }
     });
   }
@@ -210,13 +210,13 @@ export class BinaryLoader {
   private addIndices(geometry: BufferGeometry, indices: ArrayBuffer): void {
     const indicesAttribute = new Uint8BufferAttribute(indices, 4);
     indicesAttribute.normalized = true;
-    geometry.setAttribute('indices', indicesAttribute);
+    geometry.addAttribute('indices', indicesAttribute);
   }
 
   private addNormalAttribute(geometry: BufferGeometry, numPoints: number): void {
     if (!geometry.getAttribute('normal')) {
       const buffer = new Float32Array(numPoints * 3);
-      geometry.setAttribute('normal', new BufferAttribute(new Float32Array(buffer), 3));
+      geometry.addAttribute('normal', new BufferAttribute(new Float32Array(buffer), 3));
     }
   }
 
